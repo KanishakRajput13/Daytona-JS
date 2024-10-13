@@ -76,6 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Start game function
   function startGame(difficulty, car, background) {
       alert("Game started with " + difficulty + " difficulty, " + car + " car, and " + background + " background selected!");
-      window.location.href = '../Daytona-JS/html/game.html';
+      window.location.href = '../html/game.html';
   }
 });
