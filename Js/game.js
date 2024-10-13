@@ -6,33 +6,38 @@ const ASSETS = {
   },
 
   IMAGE: {
+    TREE: {
+      src: "../img/tree.png",
+      width: 132,
+      height: 192,
+    },
     BUILDING: {
-      src: "../Daytona Assets/img/building.png",
+      src: "../img/building.png",
       width: 132,
       height: 192,
     },
 
     HERO: {
-      src: "hero.png",
+      src: "../img/hero.png",
       width: 110,
       height: 56,
     },
 
     CAR: {
-      src: "../Daytona Assets/img/car04.png",
+      src: "../img/car04.png",
       width: 50,
       height: 36,
     },
 
     FINISH: {
-      src: "../Daytona Assets/img/finish.png",
+      src: "../img/finish.png",
       width: 339,
       height: 180,
       offset: -0.5,
     },
 
     SKY: {
-      src: "backdrop.jpg",
+      src: "../img/backdrop.jpg",
     },
   },
 
@@ -43,6 +48,8 @@ const ASSETS = {
     beep: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav",
   },
 };
+
+// helper functions
 
 Number.prototype.pad = function (numZeros, char = 0) {
   let n = Math.abs(this);
@@ -95,6 +102,10 @@ function sleep(ms) {
     setTimeout((_) => resolve(), ms);
   });
 }
+
+// ------------------------------------------------------------
+// objects
+// ------------------------------------------------------------
 
 class Line {
   constructor() {
@@ -219,6 +230,10 @@ class Audio {
   }
 }
 
+// ------------------------------------------------------------
+// global varriables
+// ------------------------------------------------------------
+
 const highscores = [];
 
 const width = 800;
@@ -253,6 +268,7 @@ const FrameRate = 1000 / 25; // in ms
 
 let audio;
 
+// game
 let inGame,
   start,
   playerX,
@@ -265,6 +281,10 @@ let inGame,
   countDown;
 let lines = [];
 let cars = [];
+
+// ------------------------------------------------------------
+// map
+// ------------------------------------------------------------
 
 function genMap() {
   let map = [];
@@ -316,6 +336,10 @@ function genMap() {
 
 let map = genMap();
 
+// ------------------------------------------------------------
+// additional controls
+// ------------------------------------------------------------
+
 addEventListener(`keyup`, function (e) {
   if (e.code === "KeyM") {
     e.preventDefault();
@@ -365,6 +389,10 @@ addEventListener(`keyup`, function (e) {
   }
 });
 
+// ------------------------------------------------------------
+// game loop
+// ------------------------------------------------------------
+
 function update(step) {
   // prepare this iteration
   pos += speed;
@@ -377,6 +405,7 @@ function update(step) {
   scoreVal += speed * step;
   countDown -= step;
 
+  // left / right position
   playerX -= (lines[startPos].curve / 5000) * step * speed;
 
   if (KEYS.ArrowRight)
@@ -496,8 +525,8 @@ function update(step) {
     l.clearSprites();
 
     // first draw section assets
-    if (n % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.BUILDING, -2);
-    if ((n + 5) % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.BUILDING, 1.3);
+    if (n % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.TREE, -2);
+    if ((n + 5) % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.TREE, 1.3);
 
     if (l.special) l.drawSprite(level, 0, l.special, l.special.offset || 0);
 
