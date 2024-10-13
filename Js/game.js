@@ -18,7 +18,7 @@ const ASSETS = {
     },
 
     HERO: {
-      src: "../img/hero.png",
+      src: "../img/heroR.png",
       width: 110,
       height: 56,
     },
