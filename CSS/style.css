@@ -1,5 +1,7 @@
 html, body {
 overflow: hidden;
+font-family: "Press Start 2P", monospace;
+height: 98vh;
 }
 #load {
     position: absolute;
@@ -14,10 +16,11 @@ overflow: hidden;
 #load h1 {
     width: 100%;
     text-align: center;
-    font-size: 60px;
-    font-weight: 900;
+    font-size: 40px;
+    /*font-weight: 900;*/
 }
 #load button {
+    font-family: "Press Start 2P", monospace;
     width: 20%;
     margin: auto;
     padding: 5px;
@@ -40,3 +43,4 @@ overflow: hidden;
     left: 25%;
     border-radius: 10px;
 }
+
