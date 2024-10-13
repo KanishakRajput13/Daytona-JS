@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedDifficulty = this.getAttribute("value");
           document.querySelectorAll("#difficulty button").forEach(btn => btn.classList.remove("selected"));
           this.classList.add("selected");
+          localStorage.setItem('selectedDifficulty', selectedDifficulty);
       });
   });
 
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedCar = this.getAttribute("value");
           document.querySelectorAll("#car button").forEach(btn => btn.classList.remove("selected"));
           this.classList.add("selected");
+          localStorage.setItem('selectedCar', selectedCar);
       });
   });
 
@@ -48,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
           selectedBackground = this.getAttribute("value");
           document.querySelectorAll("#backgroundOptions button").forEach(btn => btn.classList.remove("selected"));
           this.classList.add("selected");
+          localStorage.setItem('selectedBackground', selectedBackground);
       });
   });
 

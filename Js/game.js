@@ -18,7 +18,7 @@ const ASSETS = {
     },
 
     HERO: {
-      src: "../img/heroR.png",
+      src: "",
       width: 110,
       height: 56,
     },
@@ -37,7 +37,7 @@ const ASSETS = {
     },
 
     SKY: {
-      src: "../img/backdrop.jpg",
+      src: "../img/night.jpg",
     },
   },
 
@@ -46,8 +46,10 @@ const ASSETS = {
     engine: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/engine.wav",
     honk: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/honk.wav",
     beep: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav",
+    gentleman: "../img/gentleman.ogg",
   },
 };
+
 
 // helper functions
 
@@ -245,13 +247,13 @@ const camD = 0.2;
 const H = 1500;
 const N = 70;
 
-const maxSpeed = 200;
-const accel = 38;
+let maxSpeed = 200;
+let accel = 38;
 const breaking = -80;
 const decel = -40;
 const maxOffSpeed = 40;
 const offDecel = -70;
-const enemy_speed = 8;
+let enemy_speed = 8;
 const hitSpeed = 20;
 
 const LANE = {
@@ -264,7 +266,7 @@ const mapLength = 15000;
 
 // loop
 let then = timestamp();
-const FrameRate = 1000 / 25; // in ms
+let FrameRate = 1000 / 25; // in ms
 
 let audio;
 
@@ -358,6 +360,7 @@ addEventListener(`keyup`, function (e) {
         text.classList.remove("blink");
         text.innerText = 3;
         audio.play("beep");
+        audio.play("gentleman");
         return sleep(1000);
       })
       .then((_) => {
@@ -501,7 +504,9 @@ function update(step) {
       if (inGame) audio.play("honk");
     }
   }
-
+  function getRandomSprite() {
+    return Math.random() > 0.5 ? ASSETS.IMAGE.TREE : ASSETS.IMAGE.BUILDING;
+  }
   // draw road
   let maxy = height;
   let camH = H + lines[startPos].y;
@@ -525,8 +530,14 @@ function update(step) {
     l.clearSprites();
 
     // first draw section assets
-    if (n % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.TREE, -2);
-    if ((n + 5) % 10 === 0) l.drawSprite(level, 0, ASSETS.IMAGE.TREE, 1.3);
+    if (n % 10 === 0) {
+      if (!l.sprite) l.sprite = getRandomSprite();
+      l.drawSprite(level, 0, l.sprite, -2);
+    }
+    if ((n + 5) % 10 === 0) {
+      if (!l.sprite) l.sprite = getRandomSprite();
+      l.drawSprite(level, 0, l.sprite, 1.3);
+    }
 
     if (l.special) l.drawSprite(level, 0, l.special, l.special.offset || 0);
 
@@ -649,6 +660,61 @@ function updateHighscore() {
 }
 
 function init() {
+  
+  const selectedCar = localStorage.getItem('selectedCar');
+
+  switch (selectedCar) {
+    case 'Red':
+      ASSETS.IMAGE.HERO.src = "../img/HeroR.png";
+      break;
+    case 'Green':
+      ASSETS.IMAGE.HERO.src = "../img/HeroG.png";
+      break;
+    case 'Blue':
+      ASSETS.IMAGE.HERO.src = "../img/HeroB.png";
+      break;
+    default:
+      ASSETS.IMAGE.HERO.src = "../img/HeroR.png";
+  }
+
+  const selectedBackground = localStorage.getItem('selectedBackground');
+
+  switch (selectedBackground) {
+    case 'day':
+      ASSETS.IMAGE.SKY.src = "../img/cloud.jpg";
+      break;
+    case 'night':
+      ASSETS.IMAGE.SKY.src = "../img/night.jpg";
+      break;
+    case 'sunset':
+      ASSETS.IMAGE.SKY.src = "../img/backdrop.jpg";
+      break;
+    default:
+      ASSETS.IMAGE.SKY.src = "../img/night.jpg";
+  }
+
+  const selectedDifficulty = localStorage.getItem('selectedDifficulty');
+
+  switch (selectedDifficulty) {
+    case 'easy':
+      maxSpeed = 150;
+      accel = 30;
+      enemy_speed = 5;
+      FrameRate = 1000 / 18;
+      break;
+    case 'medium':
+      maxSpeed = 200;
+      accel = 38;
+      enemy_speed = 8;
+      FrameRate = 1000 / 25;
+      break;
+    case 'hard':
+      maxSpeed = 250;
+      accel = 45;
+      enemy_speed = 10;
+      FrameRate = 1000 / 40;
+      break;
+  }
   game.style.width = width + "px";
   game.style.height = height + "px";
 
