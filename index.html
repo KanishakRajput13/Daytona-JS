@@ -6,16 +6,50 @@
     <title>Daytona Racing Game</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P"/>
-    <link rel="icon" type="image/x-icon" href="Daytona Assets/img/fav.jpg">
+    <link rel="icon" type="image/x-icon" href="img/fav.jpg">
 </head>
 <body>
-    <body id="body">
-        <div id="load">
-            <div class="loadStuff">
-                <h1>Daytona Racing Game</h1>
-                <center><button id="playButton">Play</button></center>
-            </div>
+    <div id="load">
+        <div class="loadStuff">
+            <h1>Daytona Racing Game</h1>
+            <center><button id="playButton">Play</button></center>
         </div>
+    </div>
+    <!-- Selection Menu -->
+    <div id="buttonsModal" class="modal">
+        <div class="modal-content">
+            <h2>Select Your Options</h2>
+            <div id="DiffMenu">
+                <label for="difficulty">Difficulty:</label>
+                <div id="difficulty">
+                    <button value="easy">Easy</button>
+                    <button value="medium">Medium</button>
+                    <button value="hard">Hard</button>
+                </div>
+            </div>
+            <div id="CarMenu">
+                <label for="car">Choose Your Car:</label>
+                <div id="car">
+                    <button value="Red">Red</button>
+                    <button value="Green">Green</button>
+                    <button value="Blue">Blue</button>
+                </div>
+            </div>
+            <button id="NextButton">Next</button>
+        </div>
+    </div>
+<!-- Background Menu -->
+    <div id="background" class="modal">
+        <div class="modal-content">
+            <h2>Choose the time of the day</h2>
+            <div id="backgroundOptions">
+                <button value="day">Day</button>
+                <button value="night">Night</button>
+                <button value="sunset">Sunset</button>
+            </div>
+            <button id="startGameButton2">Start Game</button>
+        </div>
+    </div>
     <script src="Js/daytona.js"></script>
 </body>
 </html>
