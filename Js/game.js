@@ -665,16 +665,16 @@ function init() {
 
   switch (selectedCar) {
     case 'Red':
-      ASSETS.IMAGE.HERO.src = "../img/HeroR.png";
+      ASSETS.IMAGE.HERO.src = "../img/heroR.png";
       break;
     case 'Green':
-      ASSETS.IMAGE.HERO.src = "../img/HeroG.png";
+      ASSETS.IMAGE.HERO.src = "../img/heroG.png";
       break;
     case 'Blue':
-      ASSETS.IMAGE.HERO.src = "../img/HeroB.png";
+      ASSETS.IMAGE.HERO.src = "../img/heroB.png";
       break;
     default:
-      ASSETS.IMAGE.HERO.src = "../img/HeroR.png";
+      ASSETS.IMAGE.HERO.src = "../img/heroR.png";
   }
 
   const selectedBackground = localStorage.getItem('selectedBackground');
