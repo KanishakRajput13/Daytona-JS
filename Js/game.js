@@ -262,7 +262,7 @@ const LANE = {
   C: 1.2,
 };
 
-const mapLength = 15000;
+let mapLength = 15000;
 
 // loop
 let then = timestamp();
@@ -701,6 +701,7 @@ function init() {
       accel = 30;
       enemy_speed = 5;
       FrameRate = 1000 / 18;
+      MapLength = 10000;
       break;
     case 'medium':
       maxSpeed = 200;
@@ -713,6 +714,7 @@ function init() {
       accel = 45;
       enemy_speed = 10;
       FrameRate = 1000 / 40;
+      MapLength = 20000;
       break;
   }
   game.style.width = width + "px";
