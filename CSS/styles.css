@@ -35,20 +35,18 @@ body {
     color: #f57214;
   }
   #score {
-    left: 45%;
+    left: 85%;
   }
   #score::before {
     content: "SCORE";
     color: #a61a9d;
   }
   #lap {
+    display: none;
     left: 88%;
     width: 45%;
   }
-  #lap::before {
-    content: "LAP";
-    color: #0082df;
-  }
+
 
   #tacho {
     position: absolute;
@@ -113,6 +111,7 @@ body {
   }
 
   #highscore {
+    display: none;
     position: absolute;
     width: 100%;
     height: 20%;
@@ -148,14 +147,6 @@ body {
     text-shadow: 0 0 black, 0 2px black, 2px 0 black, 0 0 black;
   }
 
-  .blink {
-    animation: blinker 2s steps(4, end) infinite;
-  }
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
 
   /*
 Guide
