@@ -50,6 +50,10 @@ body {
     color: #0082df;
   }
 
+  #lap {
+    display: none;
+  }
+  
   #tacho {
     position: absolute;
     text-align: right;
