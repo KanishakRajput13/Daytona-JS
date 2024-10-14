@@ -415,6 +415,12 @@ function update(step) {
 
   // win / lose + UI
 
+  let elapsedMilliseconds = timestamp() - start;
+  let elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+  let minutes = Math.floor(elapsedSeconds / 60);
+  let seconds = elapsedSeconds % 60;
+  let milliseconds = elapsedMilliseconds % 1000;
+
   if (!inGame) {
     speed = accelerate(speed, breaking, step);
     speed = speed.clamp(0, maxSpeed);
@@ -436,9 +442,11 @@ function update(step) {
     tacho.innerText = speed | 0;
 
     let cT = new Date(timestamp() - start);
-    lap.innerText = `${cT.getMinutes()}'${cT.getSeconds().pad(2)}"${cT
-      .getMilliseconds()
-      .pad(3)}`;
+    lap.innerText = `${minutes}'${seconds.toString().padStart(2, "0")}"${(
+      milliseconds / 10
+    )
+      .toFixed(0)
+      .padStart(3, "0")}`;
   }
 
   if (speed > 0) audio.play("engine", speed * 4);
