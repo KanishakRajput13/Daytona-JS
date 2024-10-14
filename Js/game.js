@@ -37,7 +37,7 @@ const ASSETS = {
     },
 
     SKY: {
-      src: "../img/night.jpg",
+      src: "",
     },
   },
 
