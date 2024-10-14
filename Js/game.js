@@ -48,9 +48,6 @@ const ASSETS = {
     beep: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/155629/beep.wav",
   },
 };
-
-// helper functions
-
 Number.prototype.pad = function (numZeros, char = 0) {
   let n = Math.abs(this);
   let zeros = Math.max(0, numZeros - Math.floor(n).toString().length);
@@ -102,11 +99,6 @@ function sleep(ms) {
     setTimeout((_) => resolve(), ms);
   });
 }
-
-// ------------------------------------------------------------
-// objects
-// ------------------------------------------------------------
-
 class Line {
   constructor() {
     this.x = 0;
@@ -171,7 +163,6 @@ class Audio {
   constructor() {
     this.audioCtx = new AudioContext();
 
-    // volume
     this.destination = this.audioCtx.createGain();
     this.volume = 1;
     this.destination.connect(this.audioCtx.destination);
@@ -230,10 +221,6 @@ class Audio {
   }
 }
 
-// ------------------------------------------------------------
-// global varriables
-// ------------------------------------------------------------
-
 const highscores = [];
 
 const width = 800;
@@ -262,13 +249,11 @@ const LANE = {
 
 const mapLength = 15000;
 
-// loop
 let then = timestamp();
 const FrameRate = 1000 / 25; // in ms
 
 let audio;
 
-// game
 let inGame,
   start,
   playerX,
@@ -281,10 +266,6 @@ let inGame,
   countDown;
 let lines = [];
 let cars = [];
-
-// ------------------------------------------------------------
-// map
-// ------------------------------------------------------------
 
 function genMap() {
   let map = [];
@@ -307,7 +288,7 @@ function genMap() {
     else if (Math.random() > 0.8)
       Object.assign(section, {
         curve: (_) => 0,
-        height: (i) => Math.sin(i / randInterval) * 1000, //small value oscillate more quickly
+        height: (i) => Math.sin(i / randInterval) * 1000, //small value oscillates more quickly
       });
     else if (Math.random() > 0.8)
       Object.assign(section, {
@@ -335,10 +316,6 @@ function genMap() {
 }
 
 let map = genMap();
-
-// ------------------------------------------------------------
-// additional controls
-// ------------------------------------------------------------
 
 addEventListener(`keyup`, function (e) {
   if (e.code === "KeyM") {
@@ -389,12 +366,7 @@ addEventListener(`keyup`, function (e) {
   }
 });
 
-// ------------------------------------------------------------
-// game loop
-// ------------------------------------------------------------
-
 function update(step) {
-  // prepare this iteration
   pos += speed;
   while (pos >= N * segL) pos -= N * segL;
   while (pos < 0) pos += N * segL;
@@ -405,7 +377,6 @@ function update(step) {
   scoreVal += speed * step;
   countDown -= step;
 
-  // left / right position
   playerX -= (lines[startPos].curve / 5000) * step * speed;
 
   if (KEYS.ArrowRight)
@@ -416,8 +387,6 @@ function update(step) {
   else hero.style.backgroundPosition = "-110px 0";
 
   playerX = playerX.clamp(-3, 3);
-
-  // speed
 
   if (inGame && KEYS.ArrowUp) speed = accelerate(speed, accel, step);
   else if (KEYS.ArrowDown) speed = accelerate(speed, breaking, step);
@@ -472,7 +441,6 @@ function update(step) {
       .pad(3)}`;
   }
 
-  // sound
   if (speed > 0) audio.play("engine", speed * 4);
 
   // draw sky
@@ -521,7 +489,6 @@ function update(step) {
     x += dx;
     dx += l.curve;
 
-    // clear assets
     l.clearSprites();
 
     // first draw section assets
@@ -608,10 +575,6 @@ function update(step) {
     }
   }
 }
-
-// ------------------------------------------------------------
-// init
-// ------------------------------------------------------------
 
 function reset() {
   inGame = false;
