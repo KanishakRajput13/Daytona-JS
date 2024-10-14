@@ -103,7 +103,6 @@ function sleep(ms) {
 }
 
 // objects
-
 class Line {
   constructor() {
     this.x = 0;
@@ -168,7 +167,6 @@ class Audio {
   constructor() {
     this.audioCtx = new AudioContext();
 
-    // volume
     this.destination = this.audioCtx.createGain();
     this.volume = 1;
     this.destination.connect(this.audioCtx.destination);
@@ -226,8 +224,6 @@ class Audio {
     request.send();
   }
 }
-
-
 const highscores = [];
 
 const width = 800;
@@ -297,7 +293,7 @@ function genMap() {
     else if (Math.random() > 0.8)
       Object.assign(section, {
         curve: (_) => 0,
-        height: (i) => Math.sin(i / randInterval) * 1000, //small value oscillate more quickly
+        height: (i) => Math.sin(i / randInterval) * 1000, //small value oscillates more quickly
       });
     else if (Math.random() > 0.8)
       Object.assign(section, {
@@ -382,6 +378,7 @@ addEventListener(`keyup`, function (e) {
   }
 });
 
+
 // main loop
 
 function update(step) {
@@ -433,6 +430,12 @@ function update(step) {
 
   // win / lose + UI
 
+  let elapsedMilliseconds = timestamp() - start;
+  let elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+  let minutes = Math.floor(elapsedSeconds / 60);
+  let seconds = elapsedSeconds % 60;
+  let milliseconds = elapsedMilliseconds % 1000;
+
   if (!inGame) {
     speed = accelerate(speed, breaking, step);
     speed = speed.clamp(0, maxSpeed);
@@ -456,6 +459,7 @@ function update(step) {
   }
 
   audio.volume = 0.5;
+
   if (speed > 0) audio.play("engine", speed * 4);
 
   sky.style.backgroundPosition = `${
@@ -501,6 +505,8 @@ function update(step) {
     );
     x += dx;
     dx += l.curve;
+
+
 
 
     l.clearSprites();

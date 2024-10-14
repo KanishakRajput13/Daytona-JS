@@ -48,6 +48,10 @@ body {
   }
 
 
+  #lap {
+    display: none;
+  }
+  
   #tacho {
     position: absolute;
     text-align: right;
