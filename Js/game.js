@@ -292,11 +292,6 @@ function genMap() {
         curve: (_) => 0,
         height: (i) => Math.sin(i / randInterval) * 1000, //small value oscillates more quickly
       });
-    else if (Math.random() > 0.8)
-      Object.assign(section, {
-        curve: (_) => 0,
-        height: (_) => randHeight,
-      });
     else
       Object.assign(section, {
         curve: (_) => randCurve,
@@ -631,55 +626,54 @@ function updateHighscore() {
 }
 
 function init() {
-  
-  const selectedCar = localStorage.getItem('selectedCar');
+  const selectedCar = localStorage.getItem("selectedCar");
 
   switch (selectedCar) {
-    case 'Red':
+    case "Red":
       ASSETS.IMAGE.HERO.src = "../img/heroR.png";
       break;
-    case 'Green':
+    case "Green":
       ASSETS.IMAGE.HERO.src = "../img/heroG.png";
       break;
-    case 'Blue':
+    case "Blue":
       ASSETS.IMAGE.HERO.src = "../img/heroB.png";
       break;
     default:
       ASSETS.IMAGE.HERO.src = "../img/heroR.png";
   }
 
-  const selectedBackground = localStorage.getItem('selectedBackground');
+  const selectedBackground = localStorage.getItem("selectedBackground");
 
   switch (selectedBackground) {
-    case 'day':
+    case "day":
       ASSETS.IMAGE.SKY.src = "../img/cloud.jpg";
       break;
-    case 'night':
+    case "night":
       ASSETS.IMAGE.SKY.src = "../img/night.jpg";
       break;
-    case 'sunset':
+    case "sunset":
       ASSETS.IMAGE.SKY.src = "../img/backdrop.jpg";
       break;
     default:
       ASSETS.IMAGE.SKY.src = "../img/night.jpg";
   }
 
-  const selectedDifficulty = localStorage.getItem('selectedDifficulty');
+  const selectedDifficulty = localStorage.getItem("selectedDifficulty");
 
   switch (selectedDifficulty) {
-    case 'easy':
+    case "easy":
       maxSpeed = 150;
       accel = 30;
       enemy_speed = 5;
       FrameRate = 1000 / 18;
       break;
-    case 'medium':
+    case "medium":
       maxSpeed = 200;
       accel = 38;
       enemy_speed = 8;
       FrameRate = 1000 / 25;
       break;
-    case 'hard':
+    case "hard":
       maxSpeed = 250;
       accel = 45;
       enemy_speed = 10;
